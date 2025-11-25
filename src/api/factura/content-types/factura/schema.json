@@ -1,0 +1,83 @@
+{
+  "kind": "collectionType",
+  "collectionName": "facturas",
+  "info": {
+    "singularName": "factura",
+    "pluralName": "facturas",
+    "displayName": "Factura"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "noFactura": {
+      "type": "biginteger",
+      "required": true
+    },
+    "fechaLimite": {
+      "type": "date",
+      "required": true
+    },
+    "cai": {
+      "type": "string",
+      "required": true
+    },
+    "rtnCliente": {
+      "type": "string"
+    },
+    "nombreCliente": {
+      "type": "string"
+    },
+    "codigoNumFactura": {
+      "type": "string",
+      "required": true
+    },
+    "subtotal": {
+      "type": "decimal",
+      "required": true,
+      "min": 0
+    },
+    "totalImpuestoQ": {
+      "type": "decimal",
+      "required": true,
+      "min": 0
+    },
+    "totalDescuento": {
+      "type": "decimal"
+    },
+    "total": {
+      "type": "decimal",
+      "required": true,
+      "min": 0
+    },
+    "totalImpuestoD": {
+      "type": "decimal"
+    },
+    "estado": {
+      "type": "enumeration",
+      "default": "PAGADO",
+      "enum": [
+        "PAGADO",
+        "PENDIENTE",
+        "CANCELADO"
+      ]
+    },
+    "infoCancelacion": {
+      "type": "text"
+    },
+    "adjunto": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "Productos": {
+      "type": "component",
+      "component": "detalle.detalle-factura",
+      "repeatable": true
+    }
+  }
+}

@@ -4,24 +4,24 @@
   "info": {
     "singularName": "plan",
     "pluralName": "plans",
-    "displayName": "plan"
+    "displayName": "Plan"
   },
   "options": {
     "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
+    "nombre": {
       "type": "string",
       "required": true
     },
-    "maxInvoices": {
+    "maxFacturas": {
       "type": "integer"
     },
-    "maxBranches": {
+    "maxSucursales": {
       "type": "integer"
     },
-    "price": {
+    "precio": {
       "type": "decimal",
       "required": true
     }

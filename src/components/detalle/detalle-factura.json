@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_detalle_detalle_facturas",
+  "info": {
+    "displayName": "DetalleFactura",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "precio": {
+      "type": "decimal",
+      "required": true,
+      "min": 0
+    },
+    "cantidad": {
+      "type": "decimal",
+      "required": true,
+      "min": 0
+    }
+  },
+  "config": {}
+}

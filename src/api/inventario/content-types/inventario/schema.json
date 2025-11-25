@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "inventarios",
+  "info": {
+    "singularName": "inventario",
+    "pluralName": "inventarios",
+    "displayName": "Inventario"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "producto": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::producto.producto"
+    },
+    "empresa": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::empresa.empresa"
+    },
+    "sucursal": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::sucursal.sucursal"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "existencia": {
+      "type": "decimal"
+    },
+    "unidadMedida": {
+      "type": "string"
+    },
+    "existenciaMinima": {
+      "type": "decimal"
+    }
+  }
+}

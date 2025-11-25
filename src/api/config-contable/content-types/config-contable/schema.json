@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "config_contables",
+  "info": {
+    "singularName": "config-contable",
+    "pluralName": "config-contables",
+    "displayName": "ConfigContable"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "fechaLimite": {
+      "type": "date",
+      "required": true
+    },
+    "rangoInicial": {
+      "type": "biginteger",
+      "required": true
+    },
+    "rangoFinal": {
+      "type": "biginteger"
+    },
+    "rtn": {
+      "type": "string",
+      "minLength": 14,
+      "maxLength": 14,
+      "required": true
+    },
+    "cai": {
+      "type": "string",
+      "required": true
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "correlativoActual": {
+      "type": "biginteger"
+    },
+    "codigoNumFactura": {
+      "type": "string",
+      "required": true
+    },
+    "Historial": {
+      "type": "component",
+      "component": "detalle.historico-config-contable",
+      "repeatable": true
+    }
+  }
+}

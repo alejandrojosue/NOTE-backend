@@ -68,6 +68,11 @@
     },
     "name": {
       "type": "string"
+    },
+    "plan": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::plan.plan"
     }
   }
 }

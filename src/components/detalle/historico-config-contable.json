@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_detalle_historico_config_contables",
+  "info": {
+    "displayName": "HistoricoConfigContable",
+    "icon": "book"
+  },
+  "options": {},
+  "attributes": {
+    "datoAnterior": {
+      "type": "json",
+      "required": true
+    },
+    "datoNuevo": {
+      "type": "json",
+      "required": true
+    },
+    "fechaHora": {
+      "type": "datetime"
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "empresas",
+  "info": {
+    "singularName": "empresa",
+    "pluralName": "empresas",
+    "displayName": "Empresa"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "rtn": {
+      "type": "string",
+      "minLength": 14,
+      "maxLength": 14,
+      "required": true
+    },
+    "nombre": {
+      "type": "string",
+      "required": true
+    },
+    "direccion": {
+      "type": "text",
+      "required": true
+    },
+    "telefonos": {
+      "type": "string"
+    },
+    "correo": {
+      "type": "email"
+    },
+    "logo": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "estado": {
+      "type": "boolean",
+      "default": true
+    },
+    "nombreEncargado": {
+      "type": "string"
+    }
+  }
+}

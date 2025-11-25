@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sucursals",
+  "info": {
+    "singularName": "sucursal",
+    "pluralName": "sucursals",
+    "displayName": "Sucursal"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "empresa": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::empresa.empresa"
+    },
+    "direccion": {
+      "type": "string",
+      "required": true
+    },
+    "telefonos": {
+      "type": "string"
+    },
+    "nombreGerente": {
+      "type": "string"
+    },
+    "estado": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

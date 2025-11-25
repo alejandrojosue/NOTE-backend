@@ -1,41 +1,49 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
-export interface DetailsHistoryChange extends Struct.ComponentSchema {
-  collectionName: 'components_details_history_changes';
+export interface DetalleDetalleFactura extends Struct.ComponentSchema {
+  collectionName: 'components_detalle_detalle_facturas';
   info: {
-    displayName: 'historyChange';
-    icon: 'stack';
-  };
-  attributes: {
-    dateChange: Schema.Attribute.DateTime & Schema.Attribute.Required;
-    newValue: Schema.Attribute.JSON & Schema.Attribute.Required;
-    oldValue: Schema.Attribute.JSON & Schema.Attribute.Required;
-    users_permissions_user: Schema.Attribute.Relation<
-      'oneToOne',
-      'plugin::users-permissions.user'
-    > &
-      Schema.Attribute.Required;
-  };
-}
-
-export interface DetailsInvoiceDetail extends Struct.ComponentSchema {
-  collectionName: 'components_details_invoice_details';
-  info: {
-    displayName: 'invoiceDetail';
+    displayName: 'DetalleFactura';
     icon: 'bulletList';
   };
   attributes: {
-    product: Schema.Attribute.String & Schema.Attribute.Required;
-    quantity: Schema.Attribute.Decimal & Schema.Attribute.Required;
-    unitPrice: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    cantidad: Schema.Attribute.Decimal &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    precio: Schema.Attribute.Decimal &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+  };
+}
+
+export interface DetalleHistoricoConfigContable extends Struct.ComponentSchema {
+  collectionName: 'components_detalle_historico_config_contables';
+  info: {
+    displayName: 'HistoricoConfigContable';
+    icon: 'book';
+  };
+  attributes: {
+    datoAnterior: Schema.Attribute.JSON & Schema.Attribute.Required;
+    datoNuevo: Schema.Attribute.JSON & Schema.Attribute.Required;
+    fechaHora: Schema.Attribute.DateTime;
   };
 }
 
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
-      'details.history-change': DetailsHistoryChange;
-      'details.invoice-detail': DetailsInvoiceDetail;
+      'detalle.detalle-factura': DetalleDetalleFactura;
+      'detalle.historico-config-contable': DetalleHistoricoConfigContable;
     }
   }
 }
