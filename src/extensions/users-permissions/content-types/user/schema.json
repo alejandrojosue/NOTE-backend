@@ -73,6 +73,18 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::plan.plan"
+    },
+    "empresa": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::empresa.empresa",
+      "inversedBy": "users_permissions_user"
+    },
+    "config_contable": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::config-contable.config-contable",
+      "inversedBy": "users_permissions_user"
     }
   }
 }

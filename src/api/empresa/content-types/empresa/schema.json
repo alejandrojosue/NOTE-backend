@@ -33,16 +33,11 @@
     },
     "logo": {
       "type": "media",
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "allowedTypes": [
         "images"
       ]
-    },
-    "users_permissions_user": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::users-permissions.user"
     },
     "estado": {
       "type": "boolean",
@@ -50,6 +45,13 @@
     },
     "nombreEncargado": {
       "type": "string"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "empresa",
+      "required": true
     }
   }
 }

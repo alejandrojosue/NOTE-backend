@@ -12,7 +12,7 @@
   "pluginOptions": {},
   "attributes": {
     "codigo": {
-      "type": "uid",
+      "type": "string",
       "required": true
     },
     "slug": {
@@ -44,12 +44,14 @@
     "empresa": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::empresa.empresa"
+      "target": "api::empresa.empresa",
+      "required": true
     },
     "users_permissions_user": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "plugin::users-permissions.user"
+      "target": "plugin::users-permissions.user",
+      "required": true
     }
   }
 }

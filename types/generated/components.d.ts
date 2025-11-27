@@ -15,6 +15,8 @@ export interface DetalleDetalleFactura extends Struct.ComponentSchema {
         },
         number
       >;
+    descuentoValor: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
+    isv: Schema.Attribute.Decimal & Schema.Attribute.Required;
     precio: Schema.Attribute.Decimal &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMax<
@@ -23,6 +25,7 @@ export interface DetalleDetalleFactura extends Struct.ComponentSchema {
         },
         number
       >;
+    producto: Schema.Attribute.Relation<'oneToOne', 'api::producto.producto'>;
   };
 }
 

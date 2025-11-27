@@ -1,0 +1,66 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ccis",
+  "info": {
+    "singularName": "cci",
+    "pluralName": "ccis",
+    "displayName": "CCI"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "rtn": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "nombre": {
+      "type": "string",
+      "required": true
+    },
+    "direccion": {
+      "type": "string"
+    },
+    "presidente": {
+      "type": "string"
+    },
+    "director": {
+      "type": "string"
+    },
+    "activa": {
+      "type": "boolean",
+      "required": false,
+      "default": true
+    },
+    "telefonos": {
+      "type": "string",
+      "required": true
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "ingresoGenerado": {
+      "type": "decimal"
+    },
+    "isvGenerado": {
+      "type": "decimal",
+      "required": false,
+      "default": 0,
+      "min": 0
+    },
+    "saldoPendiente": {
+      "type": "decimal",
+      "default": 0
+    },
+    "saldoPagado": {
+      "type": "decimal",
+      "default": 0
+    }
+  }
+}

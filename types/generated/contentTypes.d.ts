@@ -459,6 +459,51 @@ export interface ApiAuditAudit extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCciCci extends Struct.CollectionTypeSchema {
+  collectionName: 'ccis';
+  info: {
+    displayName: 'CCI';
+    pluralName: 'ccis';
+    singularName: 'cci';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    activa: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    direccion: Schema.Attribute.String;
+    director: Schema.Attribute.String;
+    ingresoGenerado: Schema.Attribute.Decimal;
+    isvGenerado: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<0>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::cci.cci'> &
+      Schema.Attribute.Private;
+    logo: Schema.Attribute.Media<'images'>;
+    nombre: Schema.Attribute.String & Schema.Attribute.Required;
+    presidente: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    rtn: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    saldoPagado: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
+    saldoPendiente: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
+    telefonos: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiConfigContableConfigContable
   extends Struct.CollectionTypeSchema {
   collectionName: 'config_contables';
@@ -530,7 +575,7 @@ export interface ApiEmpresaEmpresa extends Struct.CollectionTypeSchema {
       'api::empresa.empresa'
     > &
       Schema.Attribute.Private;
-    logo: Schema.Attribute.Media<'images', true>;
+    logo: Schema.Attribute.Media<'images'>;
     nombre: Schema.Attribute.String & Schema.Attribute.Required;
     nombreEncargado: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
@@ -547,7 +592,8 @@ export interface ApiEmpresaEmpresa extends Struct.CollectionTypeSchema {
     users_permissions_user: Schema.Attribute.Relation<
       'oneToOne',
       'plugin::users-permissions.user'
-    >;
+    > &
+      Schema.Attribute.Required;
   };
 }
 
@@ -562,15 +608,15 @@ export interface ApiFacturaFactura extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
-    adjunto: Schema.Attribute.Media<'images' | 'files', true>;
-    cai: Schema.Attribute.String & Schema.Attribute.Required;
-    codigoNumFactura: Schema.Attribute.String & Schema.Attribute.Required;
+    adjunto: Schema.Attribute.Media<'images' | 'files'>;
+    cai: Schema.Attribute.String;
+    codigoNumFactura: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     estado: Schema.Attribute.Enumeration<['PAGADO', 'PENDIENTE', 'CANCELADO']> &
       Schema.Attribute.DefaultTo<'PAGADO'>;
-    fechaLimite: Schema.Attribute.Date & Schema.Attribute.Required;
+    fechaLimite: Schema.Attribute.Date;
     infoCancelacion: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -578,11 +624,19 @@ export interface ApiFacturaFactura extends Struct.CollectionTypeSchema {
       'api::factura.factura'
     > &
       Schema.Attribute.Private;
-    noFactura: Schema.Attribute.BigInteger & Schema.Attribute.Required;
-    nombreCliente: Schema.Attribute.String;
+    noCompraExenta: Schema.Attribute.String;
+    noConstRegExonerado: Schema.Attribute.String;
+    noFactura: Schema.Attribute.BigInteger;
+    nombreCliente: Schema.Attribute.String & Schema.Attribute.DefaultTo<'CF'>;
+    noSAG: Schema.Attribute.String;
     Productos: Schema.Attribute.Component<'detalle.detalle-factura', true>;
     publishedAt: Schema.Attribute.DateTime;
-    rtnCliente: Schema.Attribute.String;
+    rtnCliente: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 14;
+        minLength: 14;
+      }> &
+      Schema.Attribute.DefaultTo<'00000000000000'>;
     subtotal: Schema.Attribute.Decimal &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMax<
@@ -632,16 +686,21 @@ export interface ApiInventarioMovimientoInventarioMovimiento
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    empresa: Schema.Attribute.Relation<'oneToOne', 'api::empresa.empresa'>;
+    empresa: Schema.Attribute.Relation<'oneToOne', 'api::empresa.empresa'> &
+      Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::inventario-movimiento.inventario-movimiento'
     > &
       Schema.Attribute.Private;
-    producto: Schema.Attribute.Relation<'oneToOne', 'api::producto.producto'>;
+    precioCompra: Schema.Attribute.Decimal;
+    precioVenta: Schema.Attribute.Decimal;
+    producto: Schema.Attribute.Relation<'oneToOne', 'api::producto.producto'> &
+      Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    sucursal: Schema.Attribute.Relation<'oneToOne', 'api::sucursal.sucursal'>;
+    sucursal: Schema.Attribute.Relation<'oneToOne', 'api::sucursal.sucursal'> &
+      Schema.Attribute.Required;
     tipoMovimiento: Schema.Attribute.Enumeration<
       ['ENTRADA', 'SALIDA', 'AJUSTE']
     > &
@@ -652,7 +711,8 @@ export interface ApiInventarioMovimientoInventarioMovimiento
     users_permissions_user: Schema.Attribute.Relation<
       'oneToOne',
       'plugin::users-permissions.user'
-    >;
+    > &
+      Schema.Attribute.Required;
   };
 }
 
@@ -670,7 +730,8 @@ export interface ApiInventarioInventario extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    empresa: Schema.Attribute.Relation<'oneToOne', 'api::empresa.empresa'>;
+    empresa: Schema.Attribute.Relation<'oneToOne', 'api::empresa.empresa'> &
+      Schema.Attribute.Required;
     existencia: Schema.Attribute.Decimal;
     existenciaMinima: Schema.Attribute.Decimal;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -681,7 +742,8 @@ export interface ApiInventarioInventario extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     producto: Schema.Attribute.Relation<'oneToOne', 'api::producto.producto'>;
     publishedAt: Schema.Attribute.DateTime;
-    sucursal: Schema.Attribute.Relation<'oneToOne', 'api::sucursal.sucursal'>;
+    sucursal: Schema.Attribute.Relation<'oneToOne', 'api::sucursal.sucursal'> &
+      Schema.Attribute.Required;
     unidadMedida: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -689,7 +751,8 @@ export interface ApiInventarioInventario extends Struct.CollectionTypeSchema {
     users_permissions_user: Schema.Attribute.Relation<
       'oneToOne',
       'plugin::users-permissions.user'
-    >;
+    > &
+      Schema.Attribute.Required;
   };
 }
 
@@ -733,11 +796,12 @@ export interface ApiProductoProducto extends Struct.CollectionTypeSchema {
   };
   attributes: {
     activo: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
-    codigo: Schema.Attribute.UID & Schema.Attribute.Required;
+    codigo: Schema.Attribute.String & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    empresa: Schema.Attribute.Relation<'oneToOne', 'api::empresa.empresa'>;
+    empresa: Schema.Attribute.Relation<'oneToOne', 'api::empresa.empresa'> &
+      Schema.Attribute.Required;
     existencia: Schema.Attribute.Integer & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -770,7 +834,8 @@ export interface ApiProductoProducto extends Struct.CollectionTypeSchema {
     users_permissions_user: Schema.Attribute.Relation<
       'oneToOne',
       'plugin::users-permissions.user'
-    >;
+    > &
+      Schema.Attribute.Required;
   };
 }
 
@@ -785,18 +850,19 @@ export interface ApiSucursalSucursal extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
+    activa: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     direccion: Schema.Attribute.String & Schema.Attribute.Required;
     empresa: Schema.Attribute.Relation<'oneToOne', 'api::empresa.empresa'>;
-    estado: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::sucursal.sucursal'
     > &
       Schema.Attribute.Private;
+    nombre: Schema.Attribute.String & Schema.Attribute.Required;
     nombreGerente: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     telefonos: Schema.Attribute.String;
@@ -1307,6 +1373,10 @@ export interface PluginUsersPermissionsUser
   };
   attributes: {
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    config_contable: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::config-contable.config-contable'
+    >;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     createdAt: Schema.Attribute.DateTime;
@@ -1317,6 +1387,7 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
+    empresa: Schema.Attribute.Relation<'oneToOne', 'api::empresa.empresa'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1361,6 +1432,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::audit.audit': ApiAuditAudit;
+      'api::cci.cci': ApiCciCci;
       'api::config-contable.config-contable': ApiConfigContableConfigContable;
       'api::empresa.empresa': ApiEmpresaEmpresa;
       'api::factura.factura': ApiFacturaFactura;

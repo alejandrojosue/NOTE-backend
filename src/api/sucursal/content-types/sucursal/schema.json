@@ -11,6 +11,10 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "nombre": {
+      "type": "string",
+      "required": true
+    },
     "empresa": {
       "type": "relation",
       "relation": "oneToOne",
@@ -26,7 +30,7 @@
     "nombreGerente": {
       "type": "string"
     },
-    "estado": {
+    "activa": {
       "type": "boolean",
       "default": true
     }

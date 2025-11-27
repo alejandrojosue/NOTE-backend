@@ -13,25 +13,29 @@
   "attributes": {
     "noFactura": {
       "type": "biginteger",
-      "required": true
+      "required": false
     },
     "fechaLimite": {
       "type": "date",
-      "required": true
+      "required": false
     },
     "cai": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "rtnCliente": {
-      "type": "string"
+      "type": "string",
+      "default": "00000000000000",
+      "minLength": 14,
+      "maxLength": 14
     },
     "nombreCliente": {
-      "type": "string"
+      "type": "string",
+      "default": "CF"
     },
     "codigoNumFactura": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "subtotal": {
       "type": "decimal",
@@ -43,6 +47,9 @@
       "required": true,
       "min": 0
     },
+    "totalImpuestoD": {
+      "type": "decimal"
+    },
     "totalDescuento": {
       "type": "decimal"
     },
@@ -50,9 +57,6 @@
       "type": "decimal",
       "required": true,
       "min": 0
-    },
-    "totalImpuestoD": {
-      "type": "decimal"
     },
     "estado": {
       "type": "enumeration",
@@ -68,11 +72,20 @@
     },
     "adjunto": {
       "type": "media",
-      "multiple": true,
+      "multiple": false,
       "allowedTypes": [
         "images",
         "files"
       ]
+    },
+    "noCompraExenta": {
+      "type": "string"
+    },
+    "noConstRegExonerado": {
+      "type": "string"
+    },
+    "noSAG": {
+      "type": "string"
     },
     "Productos": {
       "type": "component",

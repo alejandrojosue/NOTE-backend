@@ -14,22 +14,26 @@
     "producto": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::producto.producto"
+      "target": "api::producto.producto",
+      "required": true
     },
     "empresa": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::empresa.empresa"
+      "target": "api::empresa.empresa",
+      "required": true
     },
     "sucursal": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::sucursal.sucursal"
+      "target": "api::sucursal.sucursal",
+      "required": true
     },
     "users_permissions_user": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "plugin::users-permissions.user"
+      "target": "plugin::users-permissions.user",
+      "required": true
     },
     "cantidad": {
       "type": "decimal",
@@ -46,6 +50,12 @@
     },
     "comentario": {
       "type": "string"
+    },
+    "precioCompra": {
+      "type": "decimal"
+    },
+    "precioVenta": {
+      "type": "decimal"
     }
   }
 }
